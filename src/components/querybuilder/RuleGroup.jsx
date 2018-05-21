@@ -7,7 +7,7 @@ import Rule from './Rule';
 import { Icon } from 'antd';
 import { Row, Col } from 'antd';
 
-import './tree.scss';
+import './tree.less';
 
 const newRule = () => {
   return  {
