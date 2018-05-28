@@ -9,9 +9,6 @@
 @label-width: 120px;
 @label-height: 30px;
 @label-border-radius: 0px;
-
-
-//------- {{ Styles }} -------//
 .wrapper {
   position: relative;
 }
@@ -31,6 +28,7 @@
 }
 
 .entry {
+  // line-height: @label-height - 5px * 2;
   position: relative;
   &:before {
     content: "";
@@ -97,7 +95,7 @@
   text-align: center;
 
   border-radius: @label-border-radius;
-  position: absolute;
+    position: absolute;
   left: 0;
   top: 50%;
   margin-top: -1em;

@@ -54,8 +54,8 @@ class App extends Component {
     const {query} = this.state;
     return (
       <div className="App">
-        <QueryBuilder query={query} onChange={this.onChange}/>
-        <pre>{JSON.stringify(query, null, 2)}</pre>
+        <QueryBuilder query={query} onChange={this.onChange} className="qb"/>
+        <pre className="code">{JSON.stringify(query, null, 2)}</pre>
       </div>
     );
   }

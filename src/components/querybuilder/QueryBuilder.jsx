@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RuleGroup, newRuleGroup } from './RuleGroup';
 
+
 class QueryBuilder extends Component {
   constructor(props) {
     super(props);
@@ -13,8 +14,20 @@ class QueryBuilder extends Component {
     this.setState({query});
     onChange(query);
   }
+  onRemoveGroup = (a, b) => {
+    const {onChange} = this.props;
+    const query = {
+      combinator: 'and',
+      rules: [
+      ]
+    };
+    this.setState({query});
+    onChange({query});
+  }
   render() {
-    return (<RuleGroup onChange={this.onChange} rule={this.state.query}/>);
+    const { query } = this.state;
+
+    return (<RuleGroup onRemoveGroup={this.onRemoveGroup} onChange={this.onChange} rule={query} />);
   }
 }
 

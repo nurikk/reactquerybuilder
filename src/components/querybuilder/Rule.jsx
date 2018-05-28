@@ -5,28 +5,30 @@ import { Row, Col } from 'antd';
 import {Icon} from 'antd';
 
 import {Field, Operator, Value} from './controls';
+import {getId, getParent} from './tools';
 
 class Rule extends Component {
 
   handleFieldChange = (value) => {
-    const {onChange, id} = this.props;
-    onChange('field', value, id);
+    const {onChange, path} = this.props;
+    onChange('field', value, getId(path));
   }
 
   handleValueChange = (value) => {
-    const {onChange, id} = this.props;
-    onChange('value', value, id);
+    const {onChange, path} = this.props;
+    onChange('value', value, getId(path));
   }
   handleOperatorChange = (value) => {
-    const {onChange, id} = this.props;
-    onChange('operator', value, id);
+    const {onChange, path} = this.props;
+    onChange('operator', value, getId(path));
   }
   handleRemoveRule = () => {
-    const {onChange, id} = this.props;
-    onChange('remove', id);
+    const {onRemoveRule, path} = this.props;
+    onRemoveRule(getId(path), getParent(path));
   }
   render(){
     const {rule} = this.props;
+    // const removeEl = !isRootElement(path) ? () : null;
     return (
       <Row gutter={10} style={{width: 400, paddingTop: 10}}>
         <Col span={7}>
@@ -47,7 +49,8 @@ class Rule extends Component {
 }
 Rule.propTypes = {
   onChange: PropTypes.func,
-  id: PropTypes.number,
+  onRemoveRule: PropTypes.func,
+  path: PropTypes.arrayOf(PropTypes.number),
   rule: PropTypes.shape({
     field: PropTypes.string,
     operator: PropTypes.string,
