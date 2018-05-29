@@ -18,9 +18,6 @@ class Rule extends Component {
   onChange = (type, value) => {
     const { onChange, path, rule } = this.props;
     let newRule = Object.assign({}, rule, { [type]: value });
-    if (type === 'meta-operator') {
-      delete newRule.expect;
-    }
     onChange(newRule, getId(path));
   };
   render(){
