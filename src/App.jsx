@@ -14,7 +14,7 @@ class App extends Component {
           'meta-operator': 'EQUALS',
           'expect': {
             'value': '20181012',
-            'match-case':true
+            'match-case': true
           }
         },
         {
@@ -22,7 +22,7 @@ class App extends Component {
           'meta-operator': 'RANGE',
           'expect': {
             'value': '[1,10)',
-            'match-case':true
+            'match-case': true
           }
         },
         {
@@ -30,8 +30,33 @@ class App extends Component {
           'meta-operator': 'IN',
           'expect': {
             'value': '[foo,bar,baz]',
-            'match-case':true
+            'match-case': true
           }
+        },
+        {
+          'property': 'arg4',
+          'meta-operator': 'NOTEQUAL',
+          'expect': {
+            'value': 'bar'
+          }
+        },
+        {
+          'property': 'arg5',
+          'meta-operator': 'CONTAINS',
+          'expect': {
+            'value': 'foo'
+          }
+        },
+        {
+          'property': 'arg6',
+          'meta-operator': 'RLIKE',
+          'expect': {
+            'value': '^f.*r$'
+          }
+        },
+        {
+          'property': 'arg7',
+          'meta-operator': 'NOTEMPTY'
         }
       ],
       'sub-trees': [
@@ -43,7 +68,7 @@ class App extends Component {
               'meta-operator': 'EQUALS',
               'expect': {
                 'value': '20181012',
-                'match-case':true
+                'match-case': true
               }
             }
           ]

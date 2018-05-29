@@ -16,6 +16,10 @@ const ControlsFactory = (rule, eventHandlers) => {
   let valueComponent = null;
 
   switch (operator) {
+  case 'NOTEMPTY':
+    valueComponent = null;
+    break;
+
   case 'RANGE':
     valueComponent = <Col span={6}><Range onChange={onValueChange} defaultValue={value}/></Col>;
     break;
