@@ -13,7 +13,7 @@ class InField extends Component {
     onChange(defaultValue);
   }
   convertValue = (value) => {
-    return removeBrackets(value).split(',');
+    return removeBrackets(value).split(',').filter(n => n);
   }
   render(){
     const { defaultValue: { value }, ...props } = this.props;
@@ -21,7 +21,7 @@ class InField extends Component {
     return (
       <Select tokenSeparators={[',']} defaultValue={values} mode="tags" style={{ width: '100%' }} {...props} onChange={this.onChange}>
         {values.map((value, idx) => {
-          return (<Option value={value}  key={idx}>{value.toString()}</Option>);
+          return (<Option value={value} key={idx}>{value}</Option>);
         })}
       </Select>
     );

@@ -23,7 +23,7 @@ class Range extends Component {
       const [_unused, leftBoudary, leftValue, rightValue, rightBoundary] = match; // eslint-disable-line no-unused-vars
       return [leftBoudary, leftValue, rightValue, rightBoundary];
     } else {
-      return ['[', 0, 0, ']'];
+      return ['[', null, null, ']'];
     }
   }
   render() {
@@ -58,7 +58,7 @@ Range.propTypes = {
 
 Range.defaultProps = {
   defaultValue: {
-    value: ['[', '', '', ']']
+    value: ['[', null, null, ']']
   }
 };
 
