@@ -5,41 +5,46 @@ import { QueryBuilder } from './components/querybuilder';
 
 class App extends Component {
   state = {
+
     query: {
-      combinator: 'and',
-      rules: [
+      'logic-operator': 'AND',
+      'meta-rules': [
         {
-          'field': 'ds',
-          'value': '20180503',
-          'operator': '='
+          'property': 'arg1',
+          'meta-operator': 'EQUALS',
+          'expect': {
+            'value': '20181012',
+            'match-case':true
+          }
         },
         {
-          'field': 'keyvalue(args, \'&\', \'=\', \'pc_i\')',
-          'value': '5a543050-2dd0-4401-d2f8-fa746e987316',
-          'operator': '='
+          'property': 'arg2',
+          'meta-operator': 'RANGE',
+          'expect': {
+            'value': '[1,10)',
+            'match-case':true
+          }
         },
         {
-          'field': 'venture',
-          'operator': '=',
-          'value': 'SG'
-        },
+          'property': 'arg3',
+          'meta-operator': 'IN',
+          'expect': {
+            'value': '[foo,bar,baz]',
+            'match-case':true
+          }
+        }
+      ],
+      'sub-trees': [
         {
-          combinator: 'and',
-          rules: [
+          'logic-operator': 'AND',
+          'meta-rules': [
             {
-              'field': 'ds',
-              'value': '20180503',
-              'operator': '='
-            },
-            {
-              'field': 'keyvalue(args, \'&\', \'=\', \'pc_i\')',
-              'value': '5a543050-2dd0-4401-d2f8-fa746e987316',
-              'operator': '='
-            },
-            {
-              'field': 'venture',
-              'operator': '=',
-              'value': 'SG'
+              'property': 'ds',
+              'meta-operator': 'EQUALS',
+              'expect': {
+                'value': '20181012',
+                'match-case':true
+              }
             }
           ]
         }
@@ -47,11 +52,11 @@ class App extends Component {
     }
   }
   onChange = (query) => {
-    this.setState({query});
+    this.setState({ query });
   }
 
   render() {
-    const {query} = this.state;
+    const { query } = this.state;
     return (
       <div className="App">
         <QueryBuilder query={query} onChange={this.onChange} className="qb"/>

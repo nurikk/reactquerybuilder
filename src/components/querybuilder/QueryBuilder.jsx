@@ -6,23 +6,23 @@ import { RuleGroup, newRuleGroup } from './RuleGroup';
 class QueryBuilder extends Component {
   constructor(props) {
     super(props);
-    const {query} = this.props;
-    this.state = {query};
+    const { query } = this.props;
+    this.state = { query };
   }
   onChange = (query) => {
-    const {onChange} = this.props;
-    this.setState({query});
+    const { onChange } = this.props;
+    this.setState({ query });
     onChange(query);
   }
-  onRemoveGroup = (a, b) => {
-    const {onChange} = this.props;
+  onRemoveGroup = () => {
+    const { onChange } = this.props;
     const query = {
-      combinator: 'and',
-      rules: [
-      ]
+      'meta-operator': 'AND',
+      'meta-rules': [],
+      'sub-trees': []
     };
-    this.setState({query});
-    onChange({query});
+    this.setState({ query });
+    onChange({ query });
   }
   render() {
     const { query } = this.state;
@@ -47,4 +47,4 @@ QueryBuilder.defaultProps = {
   query: newRuleGroup(),
   onChange: () => {}
 };
-export {QueryBuilder};
+export { QueryBuilder };

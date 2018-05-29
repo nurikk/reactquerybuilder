@@ -1,23 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Input, InputNumber } from 'antd';
 
-import {Input} from 'antd';
 
 class Value extends Component {
   handleFieldChange = (event) => {
-    const {onChange} = this.props;
-    onChange(event.target.value);
+    const { defaultValue, onChange } = this.props;
+
+    if (typeof event === 'object' && event.target) {
+      let { value } = event.target;
+      defaultValue.value = value;
+    } else {
+      defaultValue.value = event;
+    }
+
+
+    onChange(defaultValue);
   }
+
   render(){
-    const {...props} = this.props;
+    const { defaultValue, type, ...props } = this.props;
+    const types = {
+      'string': Input,
+      'number': InputNumber
+    };
+    const InputElement = types[type];
     return (
-      <Input {...props} onChange={this.handleFieldChange}/>
+      <InputElement placeholder="enter value" defaultValue={defaultValue.value} {...props} onChange={this.handleFieldChange}/>
     );
   }
 }
 
 Value.propTypes = {
+  type: PropTypes.oneOf(['string', 'number']),
   onChange: PropTypes.func,
+  defaultValue: PropTypes.shape({
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  })
 };
 
-export default Value;
+
+Value.defaultProps = {
+  type: 'string',
+  defaultValue: {
+    value: ''
+  }
+};
+export { Value };

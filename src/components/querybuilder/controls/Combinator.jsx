@@ -1,10 +1,12 @@
-import SelectField from './SelectField';
+import { SelectField } from './SelectField';
 
 class Combinator extends SelectField {
-  defaultOptions = [
-    {name: 'and', label: 'AND'},
-    {name: 'or', label: 'OR'}
-  ]
 }
+Combinator.defaultProps = {
+  operators: [
+    { name: 'AND', label: 'AND' },
+    { name: 'OR', label: 'OR' }
+  ]
+};
 
-export default Combinator;
+export { Combinator };

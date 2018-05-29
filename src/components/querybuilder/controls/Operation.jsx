@@ -1,17 +1,13 @@
-import SelectField from './SelectField';
+import { SelectField } from './SelectField';
 
 class Operator extends SelectField {
-  defaultOptions = [
-    {name: 'null', label: 'Is Null'},
-    {name: 'notNull', label: 'Is Not Null'},
-    {name: 'in', label: 'In'},
-    {name: 'notIn', label: 'Not In'},
-    {name: '=', label: '='},
-    {name: '!=', label: '!='},
-    {name: '<', label: '<'},
-    {name: '>', label: '>'},
-    {name: '<=', label: '<='},
-    {name: '>=', label: '>='}
-  ]
 }
-export default Operator;
+
+Operator.defaultProps = {
+  operators: [
+    { name: 'IN', label: 'IN' },
+    { name: 'RANGE', label: 'RANGE' },
+    { name: 'EQUALS', label: 'EQUALS' }
+  ]
+};
+export { Operator };

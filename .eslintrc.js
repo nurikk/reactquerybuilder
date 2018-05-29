@@ -39,6 +39,14 @@ module.exports = {
         "react/display-name": 1,
         "no-unused-vars": "warn",
         "no-console": 1,
-        "no-unexpected-multiline": "warn"
+        "no-unexpected-multiline": "warn",
+        "react/prop-types": 1,
+        "react/sort-comp": 1,
+        "react/destructuring-assignment": 1,
+        "react/no-danger": 1,
+        "react/no-deprecated": 1,
+        "react/no-multi-comp": 1,
+        "react/no-typos": 1,
+        "object-curly-spacing": [1, "always"]
     }
 };

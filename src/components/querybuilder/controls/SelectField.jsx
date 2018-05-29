@@ -5,16 +5,11 @@ const Option = Select.Option;
 
 
 class SelectField extends Component {
-  defaultOptions = []
-  getOperators(){
-    const {operators} = this.props;
-    return operators || this.defaultOptions;
-  }
-  render(){
-    const {...props} = this.props;
+  render = () => {
+    const { operators, ...props } = this.props;
     return (
-      <Select {...props}  style={{ width: 100 }}>
-        {this.getOperators().map((operator, idx) => {
+      <Select style={{ width: '100%' }} {...props}>
+        {operators.map((operator, idx) => {
           return (<Option value={operator.name}  key={idx}>{operator.label}</Option>);
         })}
       </Select>
@@ -29,4 +24,7 @@ SelectField.propTypes = {
     }),
   ),
 };
-export default SelectField;
+SelectField.defaultProps = {
+  operators: []
+};
+export { SelectField };
