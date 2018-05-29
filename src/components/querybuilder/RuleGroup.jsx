@@ -107,7 +107,7 @@ class RuleGroup extends Component {
       <div className="wrapper">
         <span className="label">
           <Combinator defaultValue={rule['logic-operator']} onChange={this.onCombinatorChange}/>
-          <Icon style={{ marginLeft: 8 }} onClick={ ()=>onRemoveGroup(id)} type="minus-circle"/>
+          <Icon style={{ marginLeft: 8, color: '#FF0000' }} onClick={ ()=>onRemoveGroup(id)} type="minus-circle"/>
         </span>
         <div className="branch">
           {trees}
