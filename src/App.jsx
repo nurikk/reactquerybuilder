@@ -7,75 +7,76 @@ class App extends Component {
   state = {
 
     query: {
-      'logic-operator': 'AND',
-      'meta-rules': [
+      "logic-operator": "AND",
+      "meta-rules": [
         {
-          'property': 'arg1',
-          'meta-operator': 'EQUALS',
-          'expect': {
-            'value': '201810122',
-            'match-case': true
+          "property": "arg1",
+          "meta-operator": "IN",
+          "expect": {
+            "value": "[foo,bar,baz]",
+            "match-case": true
           }
         },
         {
-          'property': 'arg2',
-          'meta-operator': 'RANGE',
-          'expect': {
-            'value': '[1,11)',
-            'match-case': true
-          }
+          "property": "arg2",
+          "expect": {
+            "value": "(0,100]",
+            "match-case": true
+          },
+          "meta-operator": "RANGE"
         },
         {
-          'property': 'arg3',
-          'meta-operator': 'IN',
-          'expect': {
-            'value': '[foo,bar,baz,zab]',
-            'match-case': true
-          }
+          "property": "arg3",
+          "expect": {
+            "value": "test",
+            "match-case": true
+          },
+          "meta-operator": "EQUALS"
         },
         {
-          'property': 'arg4',
-          'meta-operator': 'NOTEQUAL',
-          'expect': {
-            'value': 'bar1',
-            'match-case': true
-          }
+          "property": "arg4",
+          "expect": {
+            "value": "baz",
+            "match-case": true
+          },
+          "meta-operator": "NOTEQUAL"
         },
         {
-          'property': 'arg5',
-          'meta-operator': 'CONTAINS',
-          'expect': {
-            'value': 'fooa',
-            'match-case': true
-          }
+          "property": "arg5",
+          "expect": {
+            "value": "abc",
+            "match-case": true
+          },
+          "meta-operator": "CONTAINS"
         },
         {
-          'property': 'arg6',
-          'meta-operator': 'RLIKE',
-          'expect': {
-            'value': '^2f.*r$',
-            'match-case': true
-          }
+          "property": "arg6",
+          "expect": {
+            "value": "",
+            "match-case": true
+          },
+          "meta-operator": "NOTEMPTY"
         },
         {
-          'property': 'arg7',
-          'meta-operator': 'NOTEMPTY',
-          'expect': {
-            'match-case': true
-          }
+          "property": "arg7",
+          "expect": {
+            "value": "/\\d+/",
+            "match-case": true
+          },
+          "meta-operator": "RLIKE"
         }
       ],
-      'sub-trees': [
+      "sub-trees": [
         {
-          'logic-operator': 'AND',
-          'meta-rules': [
+          "logic-operator": "AND",
+          "meta-rules": [
             {
-              'property': 'ds',
-              'meta-operator': 'EQUALS',
-              'expect': {
-                'value': '201810122',
-                'match-case': true
-              }
+              "property": "foo",
+              "expect": {
+                "value": "bar",
+                "match-case": true
+              },
+              "meta-operator": "EQUALS"
             }
           ]
         }

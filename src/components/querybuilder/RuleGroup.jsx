@@ -57,7 +57,6 @@ class RuleGroup extends Component {
   }
   removeRule = (ruleId, parentId) => {
     const { rule, onChange, path, onRemoveGroup } = this.props;
-    // debugger
     rule['meta-rules'].splice(ruleId, 1);
     if (rule['meta-rules'].length === 0) {
       onRemoveGroup(parentId);
@@ -85,19 +84,19 @@ class RuleGroup extends Component {
   }
 
   render(){
-    const { rule, path, onRemoveGroup } = this.props;
+    const { rule, path, onRemoveGroup, operators } = this.props;
     const id = getId(path);
     const trees = (rule['sub-trees'] || []).map((subRule, idx) => {
       return (
         <div className="entry" key={idx}>
-          <RuleGroup path={ makePath(idx, path) } onRemoveGroup={this.removeGroup} onChange={this.onGroupChange} id={idx} rule={subRule}/>
+          <RuleGroup operators={operators} path={ makePath(idx, path) } onRemoveGroup={this.removeGroup} onChange={this.onGroupChange} id={idx} rule={subRule}/>
         </div>);
     }, this);
 
     const rules = (rule['meta-rules'] || []).map((subRule, idx) => {
       return (
         <div className="entry" key={idx}>
-          <Rule path={ makePath(idx, path) } onChange={this.onRuleChange} onRemoveRule={this.removeRule} key={idx} rule={subRule}/>
+          <Rule operators={operators} path={ makePath(idx, path) } onChange={this.onRuleChange} onRemoveRule={this.removeRule} key={idx} rule={subRule}/>
         </div>);
     }, this);
 
@@ -135,12 +134,14 @@ RuleGroup.propTypes = {
     rules: PropTypes.array
   }),
   onRemoveGroup: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  operators: PropTypes.object
 };
 
 RuleGroup.defaultProps = {
   rule: newRuleGroup(),
-  path: [0]
+  path: [0],
+  operators: []
 };
 
 export { RuleGroup };

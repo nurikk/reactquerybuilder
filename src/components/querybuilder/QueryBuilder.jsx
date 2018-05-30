@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RuleGroup, newRuleGroup } from './RuleGroup';
-
+import { operators } from './Operators';
 
 class QueryBuilder extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class QueryBuilder extends Component {
   render() {
     const { query } = this.state;
 
-    return (<RuleGroup onRemoveGroup={this.onRemoveGroup} onChange={this.onChange} rule={query} />);
+    return (<RuleGroup operators={operators} onRemoveGroup={this.onRemoveGroup} onChange={this.onChange} rule={query} />);
   }
 }
 

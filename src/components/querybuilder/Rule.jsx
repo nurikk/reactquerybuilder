@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import { Col } from 'antd';
-import { Icon } from 'antd';
+import { Col, Icon, Input } from 'antd';
 
 import { getId, getParent } from './tools';
+import { default as DefaultRule } from './Operators';
 
-import { ControlsFactory } from './ControlsFactory';
-import { Input } from 'antd';
 const InputGroup = Input.Group;
+
 class Rule extends Component {
 
   handleRemoveRule = () => {
@@ -29,18 +27,21 @@ class Rule extends Component {
     onChange(newRule, getId(path));
   };
   render(){
-    const { rule, ...rest } = this.props;
-    const eventHandlers = {
-      onFieldChange: this.onChange.bind(this, 'property'),
-      onOperatorChange: this.onChange.bind(this, 'meta-operator'),
-      onValueChange: this.onChange.bind(this, 'expect')
-    };
-    const { fieldComponent, operatorCompoment, valueComponent } = ControlsFactory(rule, eventHandlers);
+    const { operators, rule, ...rest } = this.props;
+    const operatorsList = Object.keys(operators).map(k => { return { name: k, label: operators[k].label }; });
+    const { 'meta-operator': operator, 'property': field, 'expect': value } = rule;
+    const operatorConfig = operators[operator] || DefaultRule;
+
+    const FieldComponent = operatorConfig['fieldComponent'];
+    const ValueComponent = operatorConfig['valueComponent'];
+    const OperatorComponent = operatorConfig['operatorComponent'];
+
+    const valueColumn = ValueComponent ? (<Col span={4}><ValueComponent onChange={this.onChange.bind(this, 'expect')} defaultValue={value}/></Col>) : null;
     return (
       <InputGroup {...rest}>
-        {fieldComponent}
-        {operatorCompoment}
-        {valueComponent}
+        <Col span={2}><FieldComponent onChange={this.onChange.bind(this, 'property')} defaultValue={field}/></Col>
+        <Col span={2}><OperatorComponent operators={operatorsList} onChange={this.onChange.bind(this, 'meta-operator')} defaultValue={operator}/></Col>
+        {valueColumn}
         <Col span={1} className="controls">
           <Icon onClick={this.handleRemoveRule} type="minus-circle" style={{ color: '#FF0000', cursor: 'pointer' }} />
         </Col>
@@ -49,6 +50,7 @@ class Rule extends Component {
   }
 }
 Rule.propTypes = {
+  operators: PropTypes.object,
   onChange: PropTypes.func,
   onRemoveRule: PropTypes.func,
   path: PropTypes.arrayOf(PropTypes.number),
@@ -61,6 +63,10 @@ Rule.propTypes = {
       PropTypes.array
     ])
   }),
+};
+
+Rule.defaultProps = {
+  operators: {}
 };
 
 export { Rule };

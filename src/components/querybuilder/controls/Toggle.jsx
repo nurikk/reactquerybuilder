@@ -11,6 +11,7 @@ class Toggle extends Component {
     } else {
       currentIdx ++;
     }
+
     onChange({ value: values[currentIdx] });
   }
   render() {
