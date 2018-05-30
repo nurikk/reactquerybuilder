@@ -1,4 +1,4 @@
-import { Field, Operator, Value, Range, InField, convertRangeValue, rangeToString } from './controls';
+import { Field, Operator, Value, Range, InField, convertRangeValue, rangeToString, inToString } from './controls';
 class DefaultRule {
   defaults = {
     'match-case': true
@@ -31,6 +31,17 @@ class CONTAINS extends DefaultRule {
 class IN extends DefaultRule {
   label = 'IN'
   valueComponent = InField
+  convert = (expect, from) => {
+    switch (from) {
+    case Range:
+      expect.value = inToString([ ...new Set(convertRangeValue(expect.value).slice(1, 3)) ]);
+      break;
+
+    default:
+      break;
+    }
+    return expect;
+  }
 }
 
 class RANGE extends DefaultRule {

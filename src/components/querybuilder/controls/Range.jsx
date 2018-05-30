@@ -10,11 +10,16 @@ const InputGroup = Input.Group;
 const rangeRegex = /^(\[|\()(\S+)(\]|\))$/;
 const convertRangeValue = (value) => {
   const match = rangeRegex.exec(value);
-  // debugger
   if (match) {
     const [_unused, leftBoudary, values, rightBoundary] = match; // eslint-disable-line no-unused-vars
-    const vals = values.split(',').filter(v => v).filter(v => /\d+/.test(v)).slice(0, 2);
+    const vals = values.split(',')
+      .filter(v => v)
+      .filter(v => /\d+/.test(v))
+      .slice(0, 2)
+      .map(v => parseInt(v, 10))
+      .sort();
     const [leftValue=0, rightValue=0] = vals;
+
     return [leftBoudary, leftValue, rightValue, rightBoundary];
   } else {
     return ['[', 0, 0, ']'];
@@ -44,11 +49,11 @@ class Range extends Component {
         <Toggle values={['[', '(']} onChange={this.onChange.bind(this, 0)} defaultValue={leftBoudary}/>
       </Col>
       <Col span={8}>
-        <Value type="number" onChange={this.onChange.bind(this, 1)} defaultValue={{ value: leftValue }}/>
+        <Value max={rightValue} type="number" onChange={this.onChange.bind(this, 1)} defaultValue={{ value: leftValue }}/>
       </Col>
 
       <Col span={8}>
-        <Value type="number" onChange={this.onChange.bind(this, 2)} defaultValue={{ value: rightValue }}/>
+        <Value min={leftValue} type="number" onChange={this.onChange.bind(this, 2)} defaultValue={{ value: rightValue }}/>
       </Col>
       <Col span={4}>
         <Toggle values={[']', ')']} onChange={this.onChange.bind(this, 3)} defaultValue={rightBoundary}/>
