@@ -15,11 +15,10 @@ const convertRangeValue = (value) => {
     const vals = values.split(',')
       .filter(v => v)
       .filter(v => /\d+/.test(v))
-      .slice(0, 2)
       .map(v => parseInt(v, 10))
-      .sort();
-    const [leftValue=0, rightValue=0] = vals;
-
+      .sort((a, b) => a - b);
+    const [leftValue=0, ...rightValues] = vals;
+    const rightValue = rightValues.pop() || 0;
     return [leftBoudary, leftValue, rightValue, rightBoundary];
   } else {
     return ['[', 0, 0, ']'];
