@@ -6,15 +6,12 @@ import { Input, InputNumber } from 'antd';
 class Value extends Component {
   handleFieldChange = (event) => {
     const { defaultValue, onChange } = this.props;
-
     if (typeof event === 'object' && event.target) {
       let { value } = event.target;
       defaultValue.value = value;
     } else {
       defaultValue.value = event;
     }
-
-
     onChange(defaultValue);
   }
 
@@ -38,7 +35,6 @@ Value.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   })
 };
-
 
 Value.defaultProps = {
   type: 'string',

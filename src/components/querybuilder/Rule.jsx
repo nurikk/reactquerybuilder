@@ -19,8 +19,13 @@ class Rule extends Component {
     const { onChange, path, rule } = this.props;
     let newRule = Object.assign({}, rule, { [type]: value });
     if (type === 'meta-operator') {
-      newRule.expect = { value: '', 'match-case': true };
+      newRule.expect = { value: '' };
     }
+
+    let { expect={} } = newRule;
+    expect['match-case'] = true;
+    newRule.expect = expect;
+
     onChange(newRule, getId(path));
   };
   render(){

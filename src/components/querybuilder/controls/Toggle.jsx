@@ -6,13 +6,11 @@ class Toggle extends Component {
   onChange = () => {
     const { defaultValue, values, onChange } = this.props;
     let currentIdx = values.indexOf(defaultValue);
-    // debugger
     if (currentIdx >= values.length - 1) {
       currentIdx = 0;
     } else {
       currentIdx ++;
     }
-
     onChange({ value: values[currentIdx] });
   }
   render() {
