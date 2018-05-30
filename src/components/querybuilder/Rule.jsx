@@ -4,25 +4,31 @@ import { Col, Icon, Input } from 'antd';
 
 import { getId, getParent } from './tools';
 import { default as DefaultRule } from './Operators';
+import { Object } from 'core-js';
 
 const InputGroup = Input.Group;
 
-class Rule extends Component {
 
+class Rule extends Component {
+  getOperatorConfig = (operator) => {
+    const { operators } = this.props;
+    return operators[operator] || DefaultRule;
+  }
   handleRemoveRule = () => {
     const { onRemoveRule, path } = this.props;
     onRemoveRule(getId(path), getParent(path));
   }
   onChange = (type, value) => {
     const { onChange, path, rule } = this.props;
+    const currentOperator = this.getOperatorConfig(rule['meta-operator']);
     let newRule = Object.assign({}, rule, { [type]: value });
-    if (type === 'meta-operator') {
-      newRule.expect = { value: '' };
+    const nextOperator = this.getOperatorConfig(newRule['meta-operator']);
+
+    if (currentOperator.valueComponent !== nextOperator.valueComponent) {
+      newRule.expect = nextOperator.convert(newRule.expect, currentOperator.valueComponent);
     }
 
-    let { expect={} } = newRule;
-    expect['match-case'] = true;
-    newRule.expect = expect;
+    Object.assign(newRule.expect, nextOperator.defaults);
 
     onChange(newRule, getId(path));
   };
@@ -30,7 +36,7 @@ class Rule extends Component {
     const { operators, rule, ...rest } = this.props;
     const operatorsList = Object.keys(operators).map(k => { return { name: k, label: operators[k].label }; });
     const { 'meta-operator': operator, 'property': field, 'expect': value } = rule;
-    const operatorConfig = operators[operator] || DefaultRule;
+    const operatorConfig = this.getOperatorConfig(operator);
 
     const FieldComponent = operatorConfig['fieldComponent'];
     const ValueComponent = operatorConfig['valueComponent'];
