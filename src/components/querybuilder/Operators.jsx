@@ -39,7 +39,7 @@ class IN extends DefaultRule {
   convert = (expect, from) => {
     switch (from) {
     case Range:
-      expect.value = inToString([ ...new Set(convertRangeValue(expect.value).slice(1, 3)) ]);
+      expect.value = inToString([ ...new Set(convertRangeValue(expect.value, true).slice(1, 3)) ]);
       break;
 
     default:
@@ -55,7 +55,7 @@ class RANGE extends DefaultRule {
   convert = (expect, from) => {
     switch (from) {
     case InField:
-      expect.value = rangeToString(convertRangeValue(expect.value));
+      expect.value = rangeToString(convertRangeValue(expect.value, true));
       break;
     default:
       break;

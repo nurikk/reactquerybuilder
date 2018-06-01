@@ -9,17 +9,20 @@ import Toggle from './Toggle';
 const InputGroup = Input.Group;
 
 const rangeRegex = /^(\[|\()(\S+)(\]|\))$/;
-const convertRangeValue = (value) => {
+const convertRangeValue = (value, sort = false) => {
   const match = rangeRegex.exec(value);
   if (match) {
     const [_unused, leftBoudary, values, rightBoundary] = match; // eslint-disable-line no-unused-vars
     const vals = values.split(',')
       .filter(v => v)
       .filter(v => (/\d+/).test(v))
-      .map(v => parseInt(v, 10))
-      .sort((a, b) => a - b);
+      .map(v => parseInt(v, 10));
+    if (sort) {
+      vals.sort((a, b) => a - b);
+    }
     const [leftValue = 0, ...rightValues] = vals;
     const rightValue = rightValues.pop() || 0;
+
     return [leftBoudary, leftValue, rightValue, rightBoundary];
   } else {
     return ['[', 0, 0, ']'];
@@ -36,12 +39,12 @@ class Range extends Component {
     currentValue[side] = newValue.value;
     const [leftBoudary, leftValue, rightValue, rightBoundary] = currentValue; // eslint-disable-line no-unused-vars
     defaultValue.value = rangeToString(currentValue);
+
     onChange(defaultValue);
   }
 
   render() {
     const { defaultValue: { value } } = this.props;
-
     const [leftBoudary, leftValue, rightValue, rightBoundary] = convertRangeValue(value);
 
     return (<InputGroup>
