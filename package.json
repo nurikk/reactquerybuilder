@@ -48,8 +48,8 @@
   },
   "module": "src/components/querybuilder/index.js",
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "node ./scripts/start.js",
+    "build": "node ./scripts/build.js",
     "test": "react-app-rewired test --env=jsdom",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
