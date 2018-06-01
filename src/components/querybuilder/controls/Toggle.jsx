@@ -9,7 +9,7 @@ class Toggle extends Component {
     if (currentIdx >= values.length - 1) {
       currentIdx = 0;
     } else {
-      currentIdx ++;
+      currentIdx++;
     }
 
     onChange({ value: values[currentIdx] });
@@ -26,4 +26,4 @@ Toggle.propTypes = {
   onChange: PropTypes.func
 };
 
-export { Toggle };
+export default Toggle;

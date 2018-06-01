@@ -5,13 +5,13 @@ export { makePath };
 
 
 const getId = (path) => {
-  return path[path.length-1];
+  return path[path.length - 1];
 };
 export { getId };
 
 
 const getParent = (path) => {
-  return path[path.length-2];
+  return path[path.length - 2];
 };
 export { getParent };
 

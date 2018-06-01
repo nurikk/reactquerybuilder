@@ -1,4 +1,4 @@
-import { SelectField } from './SelectField';
+import SelectField from './SelectField';
 
 class Operator extends SelectField {
 }
@@ -6,4 +6,5 @@ class Operator extends SelectField {
 Operator.defaultProps = {
   operators: []
 };
-export { Operator };
+
+export default Operator;

@@ -1,7 +1,7 @@
-import { SelectField } from './SelectField';
+import SelectField from './SelectField';
 
-class Combinator extends SelectField {
-}
+class Combinator extends SelectField {}
+
 Combinator.defaultProps = {
   operators: [
     { name: 'AND', label: 'AND' },
@@ -9,4 +9,4 @@ Combinator.defaultProps = {
   ]
 };
 
-export { Combinator };
+export default Combinator;

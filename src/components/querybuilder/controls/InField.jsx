@@ -19,7 +19,7 @@ class InField extends Component {
     defaultValue.value = inToString(newValues);
     onChange(defaultValue);
   }
-  render(){
+  render() {
     const { defaultValue: { value }, ...props } = this.props;
     const values = convertInValue(value);
     return (
@@ -44,4 +44,4 @@ InField.defaultProps = {
     value: '[]'
   }
 };
-export { InField };
+export default InField;

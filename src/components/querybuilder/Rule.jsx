@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Col, Icon, Input } from 'antd';
 
 import { getId, getParent } from './tools';
-import { default as DefaultRule } from './Operators';
-import { Object } from 'core-js';
+import DefaultRule from './Operators';
+
+import styles from './tree.module.scss';
 
 const InputGroup = Input.Group;
 
@@ -32,7 +33,7 @@ class Rule extends Component {
 
     onChange(newRule, getId(path));
   };
-  render(){
+  render() {
     const { operators, rule, ...rest } = this.props;
     const operatorsList = Object.keys(operators).map(k => { return { name: k, label: operators[k].label }; });
     const { 'meta-operator': operator, 'property': field, 'expect': value } = rule;
@@ -42,13 +43,13 @@ class Rule extends Component {
     const ValueComponent = operatorConfig['valueComponent'];
     const OperatorComponent = operatorConfig['operatorComponent'];
 
-    const valueColumn = ValueComponent ? (<Col span={4}><ValueComponent onChange={this.onChange.bind(this, 'expect')} defaultValue={value}/></Col>) : null;
+    const valueColumn = ValueComponent ? (<Col span={10}><ValueComponent onChange={this.onChange.bind(this, 'expect')} defaultValue={value}/></Col>) : null;
     return (
       <InputGroup {...rest}>
-        <Col span={2}><FieldComponent onChange={this.onChange.bind(this, 'property')} defaultValue={field}/></Col>
-        <Col span={2}><OperatorComponent operators={operatorsList} onChange={this.onChange.bind(this, 'meta-operator')} defaultValue={operator}/></Col>
+        <Col span={9}><FieldComponent onChange={this.onChange.bind(this, 'property')} defaultValue={field}/></Col>
+        <Col span={4}><OperatorComponent operators={operatorsList} onChange={this.onChange.bind(this, 'meta-operator')} defaultValue={operator}/></Col>
         {valueColumn}
-        <Col span={1} className="controls">
+        <Col span={1} className={styles.controls}>
           <Icon onClick={this.handleRemoveRule} type="minus-circle" style={{ color: '#FF0000', cursor: 'pointer' }} />
         </Col>
       </InputGroup>
@@ -75,4 +76,4 @@ Rule.defaultProps = {
   operators: {}
 };
 
-export { Rule };
+export default Rule;

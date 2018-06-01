@@ -6,7 +6,11 @@ import { operators } from './Operators';
 class QueryBuilder extends Component {
   constructor(props) {
     super(props);
-    const { query } = this.props;
+    let { query } = this.props;
+    if (Object.keys(query).length === 0) {
+      query = newRuleGroup();
+    }
+    // debugger
     this.state = { query };
   }
   onChange = (query) => {
@@ -47,4 +51,5 @@ QueryBuilder.defaultProps = {
   query: newRuleGroup(),
   onChange: () => {}
 };
-export { QueryBuilder };
+
+export default QueryBuilder;

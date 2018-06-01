@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import { Value } from './Value';
-import { Toggle } from './Toggle';
 import { Input, Col } from 'antd';
+
+import Value from './Value';
+import Toggle from './Toggle';
+
 
 const InputGroup = Input.Group;
 
@@ -14,10 +15,10 @@ const convertRangeValue = (value) => {
     const [_unused, leftBoudary, values, rightBoundary] = match; // eslint-disable-line no-unused-vars
     const vals = values.split(',')
       .filter(v => v)
-      .filter(v => /\d+/.test(v))
+      .filter(v => (/\d+/).test(v))
       .map(v => parseInt(v, 10))
       .sort((a, b) => a - b);
-    const [leftValue=0, ...rightValues] = vals;
+    const [leftValue = 0, ...rightValues] = vals;
     const rightValue = rightValues.pop() || 0;
     return [leftBoudary, leftValue, rightValue, rightBoundary];
   } else {
@@ -75,4 +76,4 @@ Range.defaultProps = {
 };
 
 
-export { Range };
+export default Range;

@@ -1,9 +1,11 @@
 const { injectBabelPlugin } = require('react-app-rewired');
-const rewireLess = require('react-app-rewire-less');
+
+const rewireCssModules = require('react-app-rewire-css-modules');
 
 
 module.exports = function override(config, env) {
+  config = rewireCssModules(config, env);
   config = injectBabelPlugin(['babel-plugin-import', { libraryName: 'antd', libraryDirectory: 'es', style: 'css' }], config);
-  config = rewireLess(config, env);
+
   return config;
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Select } from 'antd';
+
 const Option = Select.Option;
 
 
@@ -27,4 +28,5 @@ SelectField.propTypes = {
 SelectField.defaultProps = {
   operators: []
 };
-export { SelectField };
+
+export default SelectField;

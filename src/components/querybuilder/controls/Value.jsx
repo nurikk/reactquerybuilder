@@ -15,7 +15,7 @@ class Value extends Component {
     onChange(defaultValue);
   }
 
-  render(){
+  render() {
     const { defaultValue, type, ...props } = this.props;
     const types = {
       'string': Input,
@@ -42,4 +42,4 @@ Value.defaultProps = {
     value: ''
   }
 };
-export { Value };
+export default Value;

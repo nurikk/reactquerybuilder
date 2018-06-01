@@ -7,7 +7,7 @@ class Field extends Component {
     const { onChange } = this.props;
     onChange(event.target.value);
   }
-  render(){
+  render() {
     const { ...props } = this.props;
     return (
       <Input placeholder="column name" {...props} onChange={this.handleFieldChange}/>
@@ -18,4 +18,4 @@ class Field extends Component {
 Field.propTypes = {
   onChange: PropTypes.func,
 };
-export { Field };
+export default Field;

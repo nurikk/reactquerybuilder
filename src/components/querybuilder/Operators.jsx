@@ -1,4 +1,9 @@
-import { Field, Operator, Value, Range, InField, convertRangeValue, rangeToString, inToString } from './controls';
+import Field from './controls/Field';
+import Operator from './controls/Operator';
+import Value from './controls/Value';
+import Range, {convertRangeValue, rangeToString} from './controls/Range';
+import InField, { inToString } from './controls/InField';
+
 class DefaultRule {
   defaults = {
     'match-case': true

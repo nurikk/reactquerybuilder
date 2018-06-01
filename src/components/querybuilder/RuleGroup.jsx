@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Combinator } from './controls';
-import { Rule } from './Rule';
+import { Row, Col, Icon } from 'antd';
+import Combinator from './controls/Combinator';
+import Rule from './Rule';
 import { makePath, getId } from './tools';
+import styles from './tree.module.scss';
 
-import { Icon } from 'antd';
-import { Row, Col } from 'antd';
-
-import './tree.less';
 
 const newRule = () => {
   return  {
@@ -35,7 +33,7 @@ class RuleGroup extends Component {
 
   addRuleGroup = () => {
     const { rule, onChange, path } = this.props;
-    let { 'sub-trees':trees=[] } = rule;
+    let { 'sub-trees':trees = [] } = rule;
     trees.push(newRuleGroup());
     rule['sub-trees'] = trees;
     onChange(rule, getId(path));
@@ -43,7 +41,7 @@ class RuleGroup extends Component {
   }
   addNewRule = () => {
     const { rule, onChange, path } = this.props;
-    let { 'meta-rules':rules=[] } = rule;
+    let { 'meta-rules':rules = [] } = rule;
     rules.push(newRule());
     rule['meta-rules'] = rules;
     onChange(rule, getId(path));
@@ -83,19 +81,19 @@ class RuleGroup extends Component {
     onChange(rule, getId(path));
   }
 
-  render(){
+  render() {
     const { rule, path, onRemoveGroup, operators } = this.props;
     const id = getId(path);
     const trees = (rule['sub-trees'] || []).map((subRule, idx) => {
       return (
-        <div className="entry" key={idx}>
+        <div className={styles.entry} key={idx}>
           <RuleGroup operators={operators} path={ makePath(idx, path) } onRemoveGroup={this.removeGroup} onChange={this.onGroupChange} id={idx} rule={subRule}/>
         </div>);
     }, this);
 
     const rules = (rule['meta-rules'] || []).map((subRule, idx) => {
       return (
-        <div className="entry" key={idx}>
+        <div className={styles.entry} key={idx}>
           <Rule operators={operators} path={ makePath(idx, path) } onChange={this.onRuleChange} onRemoveRule={this.removeRule} key={idx} rule={subRule}/>
         </div>);
     }, this);
@@ -103,15 +101,15 @@ class RuleGroup extends Component {
     const sole = trees.length + rules.length === 0;
     return (
 
-      <div className="wrapper">
-        <span className="label">
+      <div className={styles.wrapper}>
+        <span className={styles.label}>
           <Combinator defaultValue={rule['logic-operator']} onChange={this.onCombinatorChange}/>
           <Icon style={{ marginLeft: 8, color: '#FF0000' }} onClick={ ()=>onRemoveGroup(id)} type="minus-circle"/>
         </span>
-        <div className="branch">
+        <div className={styles.branch}>
           {trees}
           {rules}
-          <div className={'controls entry' + (sole ? ' sole' : '')}>
+          <div className={[styles.controls, styles.entry, (sole ? styles.sole : '')].join(' ')}>
             <Row>
               <Col span={3}>
                 <a onClick={this.addNewRule}><Icon type="plus-circle"/> Rule</a>

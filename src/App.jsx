@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { QueryBuilder } from './components/querybuilder';
+import QueryBuilder from './components/querybuilder';
 
 class App extends Component {
   state = {
