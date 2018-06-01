@@ -9,7 +9,7 @@ class SelectField extends Component {
   render = () => {
     const { operators, ...props } = this.props;
     return (
-      <Select style={{ width: '100%' }} {...props}>
+      <Select showSearch={true} style={{ width: '100%' }} {...props}>
         {operators.map((operator, idx) => {
           return (<Option value={operator.name}  key={idx}>{operator.label}</Option>);
         })}
